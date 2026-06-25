@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  db-test:
+    image: postgres:16-alpine
+    container_name: ticketfast-db-test
+    environment:
+      POSTGRES_DB: ticketfast_test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    tmpfs:
+      - /var/lib/postgresql/data
+
+  api-test:
+    build: .
+    container_name: ticketfast-api-test
+    depends_on:
+      - db-test
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db-test:5432/ticketfast_test
+    ports:
+      - "8001:8000"
