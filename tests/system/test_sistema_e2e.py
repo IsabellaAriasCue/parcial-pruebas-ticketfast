@@ -2,7 +2,7 @@ import httpx
 
 
 BASE_URL = "http://localhost:8001"
-
+EVENTO = "sistema-evento-xyz"
 
 def test_calcular_total_recaudado():
     payload = {
@@ -13,7 +13,7 @@ def test_calcular_total_recaudado():
 
 
     response_post = httpx.post(
-        f"{BASE_URL}/reservas/sistema-evento-xyz",
+        f"{BASE_URL}/reservas/{EVENTO}",
         json=payload
     )
 
@@ -21,7 +21,7 @@ def test_calcular_total_recaudado():
 
 
     response_get = httpx.get(
-        f"{BASE_URL}/reservas/sistema-evento-xyz/resumen"
+        f"{BASE_URL}/reservas/{EVENTO}/resumen"
     )
 
     assert response_get.status_code == 200
