@@ -18,7 +18,10 @@ def test_crear_reserva_persistida(client_con_bd, db_session):
 
     reserva = (
         db_session.query(ReservaDB)
-        .filter_by(cliente_email="test@correo.com")
+        .filter_by(
+            evento_id="concierto-2026",
+            cliente_email="test@correo.com"
+        )
         .first()
     )
 
