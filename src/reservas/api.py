@@ -7,8 +7,9 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-Base.metadata.create_all(bind=engine)
-
+@app.on_event("startup")
+def startup():
+    Base.metadata.create_all(bind=engine)
 
 class ReservaInput(BaseModel):
     cliente_email: str
